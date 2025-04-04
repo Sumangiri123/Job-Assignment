@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Worker-Job Assignment</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Worker-Job Assignment</h1>
+    <form method="POST" action="/">
+        <div>
+            <label for="num_workers">Number of Workers:</label>
+            <input type="number" id="num_workers" name="num_workers" required>
+            {% if error_workers %}
+            <p class="error">{{ error_workers }}</p>
+            {% endif %}
+        </div>
+        <div>
+            <label for="num_jobs">Number of Jobs:</label>
+            <input type="number" id="num_jobs" name="num_jobs" required>
+            {% if error_jobs %}
+            <p class="error">{{ error_jobs }}</p>
+            {% endif %}
+        </div>
+        <div>
+            <label>Matrix Type:</label>
+            <input type="radio" id="cost" name="matrix_type" value="cost" checked>
+            <label for="cost">Cost</label>
+            <input type="radio" id="profit" name="matrix_type" value="profit">
+            <label for="profit">Profit</label>
+        </div>
+        <button type="submit">Next</button>
+    </form>
+</body>
+</html>

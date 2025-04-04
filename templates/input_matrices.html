@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enter Matrices</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Enter Matrices</h1>
+    <form method="POST" action="/input">
+        <input type="hidden" name="num_workers" value="{{ num_workers }}">
+        <input type="hidden" name="num_jobs" value="{{ num_jobs }}">
+        <input type="hidden" name="is_profit" value="{{ is_profit }}">
+
+        <h2>{% if is_profit %}Profit{% else %}Cost{% endif %} Matrix</h2>
+        {% if error_matrix %}
+        <p class="error">{{ error_matrix }}</p>
+        {% endif %}
+        <table>
+            {% for i in range(num_workers) %}
+            <tr>
+                {% for j in range(num_jobs) %}
+                <td><input type="number" name="cell_{{ i }}_{{ j }}" value="{{ matrix_values.get('cell_' + i|string + '_' + j|string, '') }}" required></td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>Skills Matrix (1 if skilled, 0 if not)</h2>
+        {% if error_skills %}
+        <p class="error">{{ error_skills }}</p>
+        {% endif %}
+        <table>
+            {% for i in range(num_workers) %}
+            <tr>
+                {% for j in range(num_jobs) %}
+                <td><input type="number" name="cell_skills_{{ i }}_{{ j }}" value="{{ matrix_values.get('cell_skills_' + i|string + '_' + j|string, '') }}" required></td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>Availability Matrix (1 if available, 0 if not)</h2>
+        {% if error_availability %}
+        <p class="error">{{ error_availability }}</p>
+        {% endif %}
+        <table>
+            {% for i in range(num_workers) %}
+            <tr>
+                {% for j in range(num_jobs) %}
+                <td><input type="number" name="cell_availability_{{ i }}_{{ j }}" value="{{ matrix_values.get('cell_availability_' + i|string + '_' + j|string, '') }}" required></td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>Preferences Matrix (-1: Dislike, 0: Neutral, 1: Preferred)</h2>
+        {% if error_preferences %}
+        <p class="error">{{ error_preferences }}</p>
+        {% endif %}
+        <table>
+            {% for i in range(num_workers) %}
+            <tr>
+                {% for j in range(num_jobs) %}
+                <td><input type="number" name="cell_preferences_{{ i }}_{{ j }}" value="{{ matrix_values.get('cell_preferences_' + i|string + '_' + j|string, '') }}" required></td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+
+        <button type="submit">Solve Assignment</button>
+    </form>
+</body>
+</html>

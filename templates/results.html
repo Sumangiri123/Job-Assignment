@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Assignment Results</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Assignment Results</h1>
+
+    <h2>{{ total_label }}: {{ total_value }}</h2>
+
+    <h3>Optimal Assignments:</h3>
+    <ul>
+        {% for assignment in assignments %}
+        <li>{{ assignment }}</li>
+        {% endfor %}
+    </ul>
+
+    <p><a href="{{ url_for('index') }}">Go back to input</a></p>
+</body>
+</html>
